@@ -1,50 +1,4 @@
-//Clases Paciente y Turno
-class paciente{
-    constructor(nombre,apellido,dni){
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.dni=dni;
-    }
-    listaTurnos = [];
-}
-class turno{
-    constructor(id, inicial, validez, fecha,horarios){
-        this.id=id;
-        this.inicial=inicial;
-        this.validez=validez;
-        this.horarios=horarios;
-        this.fecha=fecha;
-    }
-}
-//Lista pacientes que usamos para saber quien reservo turno.
-const listaPacientes = [];
-
 $(document).ready(()=>{
-
-    const turno1= new turno(1,"Laboratorio","Villa Urquiza","20/06/2021","9:00");
-    const turno2= new turno(2,"Laboratorio","Villa Urquiza","20/06/2021","10:00");
-    const turno3= new turno(3,"Vacunas","Villa Urquiza","20/06/2021","9:00");
-    const turno4= new turno(4,"Vacunas","Villa Urquiza","20/06/2021","10:00");
-    const turno5= new turno(5,"inicial Medico","Villa Urquiza","20/06/2021","9:00");
-    const turno6= new turno(6,"inicial Medico","Villa Urquiza","20/06/2021","10:00");
-    //turnos Belgrano
-    const turno7 = new turno(7,"Laboratorio","Belgrano","20/06/2021","9:00");
-    const turno8 = new turno(8,"Laboratorio","Belgrano","20/06/2021","10:00");
-    const turno9 = new turno(9,"Vacunas","Belgrano","20/06/2021","9:00");
-    const turno10 = new turno(10,"Vacunas","Belgrano","20/06/2021","10:00");
-    //turnos flores
-    const turno11=new turno(11,"Laboratorio","Flores","20/06/2021","9:00");
-    const turno12=new turno(12,"Laboratorio","Flores","20/06/2021","10:00");
-    const turno13=new turno(13,"inicial Medico","Flores","20/06/2021","9:00");
-    const turno14=new turno(14,"inicial Medico","Flores","20/06/2021","10:00");
-    //Cargar Turnos en el localStorage
-    const arrayTurnos = [turno1,turno2,turno3,turno4,turno5,turno6,turno7,turno8,turno9,turno10,turno11,turno12,turno13,turno14];
-    for (const turno of arrayTurnos) {
-        localStorage.setItem(turno.id,JSON.stringify(turno));
-    }
-
-
-
 })
 function generarCuitValido(dni,inicial){
     let centro
@@ -103,13 +57,16 @@ function generarCuitValido(dni,inicial){
     console.log(totalParcial);
     let IverificadorParcial=(totalParcial%11);
     let verificador = 11-IverificadorParcial;
+    if(verificador==10){
+        verificador=0;
+    }
     scuitParcial = inicial+centro+verificador;
     console.log(scuitParcial);
     return scuitParcial;
 
 }
 
-//Genero turnos que se guardan en el json con el boton generar turnos
+
 
 function crearTabla(tabla){
     let dni=document.getElementById("dni").value;
@@ -149,10 +106,10 @@ function crearTabla(tabla){
       
 }
 
-//Genero Tabla Turnos
+
     $("#tabla").append(`<table class="table" id="tableTurnos"></table>`);
     let table = document.getElementById("tableTurnos");
-//funcion del boton Turnos disponibles.
+
 $("#turnos").click(function(){
     crearTabla(table);
     return false;
