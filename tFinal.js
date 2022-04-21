@@ -57,8 +57,16 @@ function generarCuitValido(dni,inicial){
     console.log(totalParcial);
     let IverificadorParcial=(totalParcial%11);
     let verificador = 11-IverificadorParcial;
-    if(verificador==10){
+    if(verificador==11){
         verificador=0;
+    }
+    if(verificador==10&&inicial=="20"){
+        inicial="23";
+        verificador=9;
+    }
+    if(verificador==10&&inicial=="27"){
+        inicial="23";
+        verificador=4;
     }
     scuitParcial = inicial+centro+verificador;
     console.log(scuitParcial);
@@ -77,9 +85,8 @@ function crearTabla(tabla){
         inicial=document.getElementById("gridRadios2").value;
     }else if(document.getElementById("gridRadios3").checked){
         inicial=document.getElementById("gridRadios3").value;
-    }
-    else{
-        inicial=document.getElementById("gridRadios4").value;
+    }else{
+        inicial=document.getElementById("gridRadios6").value;
     }
     let validez;
     if(document.getElementById("Radios1").checked){
